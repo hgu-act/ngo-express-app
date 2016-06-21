@@ -1,0 +1,38 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		include includes/header
+	body
+		div(style="margin:auto;width:90%")
+			h2(style="margin-top:50px") 공지사항
+			div
+				table.table.table-hover.col-md-12(style="width:100%;text-align:center")
+					thead
+						th.col-md-1(style="text-align:center") 번호
+						th.col-md-8(style="text-align:center") 제목
+						th.col-md-4(style="text-align:center") 일자
+					tbody
+						if(notices.length==0)
+							tr
+								td(colspan="2") 공지사항이 없습니다.
+						else
+							- var cnt = notices.length
+							each notice in notices
+								tr.notice(data=notice.id,style="cursor:pointer")
+									td.col-md-1= cnt--
+									td.col-md-8= notice.title
+									td.col-md-3= new Date(notice.date)
+			div(style="margin-top:15px;margin-right:15px;text-align:right")
+				button.btn.btn-default(type="button" onclick="reg()") 등록
+
+
+	script(type='text/javascript').
+		$('.notice').click(function(){
+			var num = $(this).attr('data');
+			location.href='./id/'+num;
+		});
+
+		function reg(){
+			location.href="/reg";
+		}

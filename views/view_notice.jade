@@ -1,0 +1,28 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		include includes/header
+	body
+		div(style="margin:auto;width:90%")
+			h4(style="margin-top:50px;text-align:center") #{notice.title}
+			div(style="border:solid 1px #c8c8c8;padding:20px;min-height:300px")
+				| !{notice.body}
+			div(style="margin-top:15px;margin-right:15px;text-align:right") 작성 날짜 : #{ new Date(notice.date)}
+			div(style="margin-top:15px;margin-right:15px;text-align:right")
+				button.btn.btn-default(type="button" onclick="list()") 목록
+				button.btn.btn-default(type="button" onclick="mod(#{notice.id})") 수정
+				button.btn.btn-default(type="button" onclick="del(#{notice.id})") 삭제
+
+	script(type="text/javascript").
+		function del(num){
+			if(confirm('삭제하시겠습니까')){
+				location.href="/del/"+num;
+			}
+		}
+		function list(){
+			location.href="/"
+		}
+		function mod(num){
+			location.href="/mod/"+num;
+		}

@@ -1,0 +1,59 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		include includes/header
+		script(src="https://cdn.tinymce.com/4/tinymce.min.js")
+		script.
+			tinymce.init({
+			    selector: '#body',
+			    height:300,
+			    plugins: [
+			    		'advlist autolink lists link charmap print preview anchor',
+						'searchreplace visualblocks code fullscreen',
+						'insertdatetime table contextmenu paste code'
+						],
+				toolbar: "undo redo | paste | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+				paste_data_images: true,
+				images_upload_url: '/uploadImg',
+				images_upload_credentials: true
+			});
+	body
+		form#form(method="post",action="/reg")
+			div(style="margin:auto;width:90%")
+				h4(style="margin-top:50px;") 제목 :					
+					if(notice)
+						input#title(style="width:90%;",type="text",name="title", value="#{notice.title}")
+					else
+						input#title(style="width:90%;",type="text",name="title")
+				div * 이미지 파일은 드래그 해서 넣어주세요 (저용량 권장)
+				if(notice)
+					textarea#body(style="border:solid 1px #c8c8c8;padding:20px;width:100%;min-height:300px",name="bodytxt") #{notice.body}
+				else
+					textarea#body(style="border:solid 1px #c8c8c8;padding:20px;width:100%;min-height:300px",name="bodytxt") 
+				div(style="margin-top:15px;margin-right:15px;text-align:right")
+					button.btn.btn-default(type="button" onclick="list()") 목록
+					if(notice)
+						button.btn.btn-default(type="button" onclick="mod(#{notice.id})") 수정완료
+					else
+						button.btn.btn-default(type="button" onclick="reg()") 등록
+
+	script(type="text/javascript").
+		function list(){
+			location.href="/"
+		}
+		function mod(num){
+			$("#form").attr("action", "/mod/"+num);
+			reg();
+		}
+		function reg(){
+			if($("#title").val()==""){
+				alert("제목을 입력해주세요");
+				$("#title").focus();
+			}else if($("#body").val()==""){
+				alert("본문을 입력해주세요");
+				$("#body").focus();
+			}else{
+				$("#form").submit();
+			}
+		}

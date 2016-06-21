@@ -1,0 +1,21 @@
+{
+  "name": "ngo",
+  "version": "1.0.0",
+  "description": "application for ngo conference",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "forever": "^0.15.1",
+    "jade": "^1.11.0",
+    "mysql": "^2.10.2",
+    "pbkdf2-password": "^1.1.0"
+  }
+}

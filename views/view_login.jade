@@ -1,0 +1,44 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		include includes/header
+		style
+			|.colname{ padding:10px;}
+
+		
+
+	body
+		form#form(method="post",action="/login")
+			div(style="margin:auto;margin-top:30px;width:50%;border:solid 1px #c8c8c8")
+				table(style="margin:20px auto")
+					tr
+						td(colspan="2", style="text-align:center;padding-bottom:20px") 로그인이 필요한 서비스입니다
+					tr
+						td.colname 아이디
+						td.colvalue
+							input#id(type="text", name="id")
+					tr
+						td.colname 비밀번호
+						td.colvalue
+							input#pw(type="password", name="pw")
+					tr
+						td.colname
+						td.colvalue(style="padding-top:15px;text-align:right")
+							button.btn.btn-default(type="button" onclick="login()") 로그인
+			if(id)
+				input(type="hidden", name="cmd", value="#{cmd}")
+				input(type="hidden", name="nid", value="#{id}")
+
+	script(type="text/javascript").
+		function login(){
+			if($("#id").val()==""){
+				alert("아이디를 입력해주세요");
+				$("#id").focus();
+			}else if($("#pw").val()==""){
+				alert("비밀번호를 입력해주세요");
+				$("#pw").focus();
+			}else{
+				$("#form").submit();
+			}
+		}

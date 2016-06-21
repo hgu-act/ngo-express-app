@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
+  <script src="https:////ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script>
+  tinymce.init({
+    selector: '#mytextarea',
+    height:500,
+    plugins:"paste",
+	menubar:"edit",
+	toolbar:"paste",
+	paste_data_images: true,
+	images_upload_url: '/uploadImg',
+	images_upload_credentials: true
+  });
+  </script>
+</head>
+
+<body>
+<h1>TinyMCE Quick Start Guide</h1>
+  <form method="post" enctype="multipart/form-data">
+    <textarea id="mytextarea">Hello, World!</textarea>
+  </form>
+  <button id="btn">클릭</button>
+</body>
+
+<script>
+console.log(tinymce);
+$(window).load(function(){
+	$("#btn").click(function(){
+		tinymce.activeEditor.uploadImages(function(success) {
+		console.log("upload finished");
+/*
+		  $.post('/reg1', tinymce.activeEditor.getContent()).done(function() {
+		    console.log("Uploaded images and posted content as an ajax request.");
+		  });		  
+*/
+		});	
+	});
+	
+});
+
+
+</script>
+
+</html>
